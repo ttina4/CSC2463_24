@@ -1,18 +1,10 @@
+//Press mouse to draw and press 'c' to clear drawing
+
 var paintbrush;
-/*var r = color("#ea412c");
-let o = color("#ef8734");
-let y = color("#fff84a");
-let g = color("#77f23b");
-let lb = color("#74f9fc");
-let db = color("#0044f7");
-let p = color("#e95dfa");
-let b = color("#774315");
-let w = color(255);
-let bl = color(0);*/
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(225);
+  background(245);
   paintbrush = color(0, 0, 0);
 }
 
@@ -96,7 +88,18 @@ function draw() {
 
   if (mouseIsPressed) {
     stroke(paintbrush);
-    strokeWeight(3);
+    strokeWeight(7);
     line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+
+}
+
+//Press C to clear the drawings
+function keyPressed() {
+  if (key = 'c' || key == 'C')
+  {
+    fill(245);
+    noStroke();
+    rect(0, 0, width, height);
   }
 }
