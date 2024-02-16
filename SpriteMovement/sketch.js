@@ -1,3 +1,5 @@
+//Use arrow keys for movement
+
 let sprite;
 let characters = [];
 
@@ -51,7 +53,7 @@ function draw() {
   
 }
 
-//making a Class, so you can have multiple characters
+//Making a Class, so you can have multiple characters
 class Character{
   constructor(x, y, width, height, spriteSheet, animation){
     this.sprite = new Sprite(x, y, width, height);
@@ -102,7 +104,7 @@ class Character{
     this.sprite.vel.x = 0;
   } 
 
-  //move sprite down
+  //Move sprite down
     moveDown(){
     this.sprite.changeAni('down');
     this.sprite.vel.y = 2;
