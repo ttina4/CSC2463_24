@@ -24,7 +24,7 @@ function windowResized() {
 }
 
 function draw() { 
-  background(220);
+  background(0);
 
   //Code to make sprite move and stop when press and release key
   characters.forEach((character) => {
