@@ -26,25 +26,25 @@ function draw() {
 
   //Code to make sprite move and stop when press and release key
   characters.forEach((character) => {
-    if (kb.pressing('d')){
+    if (kb.pressing('arrowRight')){
       character.moveRight();
     } 
-    else if (kb.pressing('a')){
+    else if (kb.pressing('arrowLeft')){
       character.moveLeft();
     }
-    else if (kb.pressing('w')){
+    else if (kb.pressing('arrowUp')){
       character.moveUp();
     }
-    else if (kb.pressing('s')){
+    else if (kb.pressing('arrowDown')){
       character.moveDown();
     }
-    else if (kb.released('w')){
+    else if (kb.released('arrowUp')){
       character.stopUp();
     }
-    else if (kb.released ('s')){
+    else if (kb.released ('arrowDown')){
       character.stopDown();
     }
-    else if (kb.released ('a') || kb.released ('d')){
+    else if (kb.released ('arrowLeft') || kb.released ('arrowRight')){
       character.stop();
     }
   })
@@ -113,16 +113,16 @@ class Character{
 //Code to Move the character with keys
 function keyTypedO(){
   switch(key){
-    case 'd':
+    case 'arrowRight':
       moveRight();
       break;
-    case 'a':
+    case 'arrowLeft':
       moveLeft();
       break; 
-    case'w':
+    case'arrowUp':
       moveUp();
       break;
-    case 's':
+    case 'arrowDown':
       moveDown();
       break;
   }
