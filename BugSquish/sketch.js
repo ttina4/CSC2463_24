@@ -1,19 +1,22 @@
 let bug;
 let bugs = [];
 let time, score, startTime, endTime;
+let bugAni;
+let wall = [];
+
+function preload() {
+  bugs[0] = loadImage("dead roach-1.png");
+  bugs[1] = loadImage("dead roach-2.png");
+  bugs[2] = loadImage("dead roach-3.png");
+  bugs[3] = loadImage("dead roach-4.png");
+}
 
 function setup() {
-  createCanvas(windwowWidth, windowHeight);
-
-  let animation = {
-    scuttle: {row: 0, col: 0, frame: 3},
-    squish: {row: 0, col: 4, frame: 1}, 
-  }
-  bugs.push(new roach(128,32,32,32, 'assets/dead roach.png', animation));
-  
+  createCanvas(windowWidth, windowHeight);
   score = 0;
-  startTime = 30;
+  startTime = 30; 
   endTime = false;
+  time = 30;
 }
 
 function windowResized() {
@@ -22,21 +25,36 @@ function windowResized() {
 
 function draw() {
   background(220);
-
-  text("score =")
-  
+  textSize(30);
+  text ("Time: " + time, 30, 50)
+  text("Score: ", 30, 100);
+  if (frameCount % 60 == 0 && time > 0) {
+    time--;
+  } else if (time == 0) {
+    text ("Gameover", windowWidth/2, windowHeight/2);
+  }
 }
 
-//this is your class called Slug, even though i drew a roach or smth, but this is so you can easily dulpicate the bug
-//and have it appear on the screen a lot like the sprite thing. Just make a new slug in the setup function with the 
-//same parameters that you see after constructor. or just look at the sprite movement program if you wanna copy.
-//if you plan on using my roach drawing you can save the frames as a sprite sheet 
+
 //roach still, roach move, roach die.
-class roach {
-  constructor(x,y,width,height, spriteSheet, animation) { 
-    this.bug = new Bug (x,y,width,height);
+//IDK why they collide nor do i know how to make walls plz help
+class roach{
+  constructor(x, y, width, height, spriteSheet, animation){
+    this.bug = new Sprite(x, y, width, height);
     this.bug.spriteSheet = spriteSheet;
     this.bug.anis.frameDelay = 2;
     this.bug.addAnis(animation);
+    this.bug.changeAni('scuttle');
+    this.bug.vel.x = 3;
+    this.bug.vel.y = 0;
+    if (this.bug.x >= 600){
+      this.bug.vel.x = -3;
+    }
   }
+  squishBug(){
+    if(mouseButton.presses()){
+      this.bug.changeAni('squish');
+    }
+  }
+ 
 }
