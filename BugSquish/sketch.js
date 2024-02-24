@@ -20,9 +20,13 @@ function setup() {
   gameState = "start";
   bugGroup = new Group();
   walls = new Group();
-  
+
   textFont('Comic Sans MS');
   textAlign(CENTER);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight)
 }
 
 function draw() {
