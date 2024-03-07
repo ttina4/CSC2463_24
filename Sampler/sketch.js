@@ -47,16 +47,19 @@ function setup() {
   button1.mousePressed( () => play('bird') );
 
   button2 = createButton("cat");
+  button2.style('background-color', color);
   button2.size(100, 50);
   button2.position(160, height/1.8);
   button2.mousePressed( () => play('cat') );
 
   button3 = createButton("keyboard");
+  button3.style('background-color', color);
   button3.size(100, 50);
   button3.position(270, height/1.8);
   button3.mousePressed( () => play('keyboard') );
 
   button4 = createButton("water");
+  button4.style('background-color', color);
   button4.size(100, 50);
   button4.position(380, height/1.8);
   button4.mousePressed( () => play('water') );
