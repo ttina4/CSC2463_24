@@ -1,6 +1,23 @@
-let synth, sin, sawwooth;
-let num = 0.2;
-let slider; 
+let synth, sin, sawwooth, slider, pitchSlider;
+let num = 0.2; 
+
+/*const synthesize = new Tone.PolySynth(Tone.Synth);
+const bend = new Tone.PitchShift();
+
+bend.pitch = 0;
+synth.connect(bend);
+bend.toDestination();
+
+let notes = {
+  'a': "C4",
+  's': "D4",
+  'd': "E4",
+  'f': "F4",
+  'g': "G4",
+  'h': "A4",
+  'j': "B4",
+  'k': "C5"
+}*/
 
 function setup() {
   createCanvas(600, 600);
@@ -18,17 +35,19 @@ function setup() {
   sawwooth.position(300, 300);
   sawwooth.mousePressed(Saw);
 
-  slider = createSlider(0.01, 1,0.1,0.01);
-  slider.position(220, 350)
+  slider = createSlider(0.1, 2, 0.1, 0.1);
+  slider.position(220, 350);
   slider.mouseReleased(()=>{
-    num = slider.value();
-  })
+    num = slider.value()
+  });
   
-}
+  /*pitchSlider = createSlider(0.1, 2, 0.1, 0.1);
+  pitchSlider.position(220, 390);
+  pitchSlider.mouseReleasedS(()=>{
+    bend.pitch = pitchSlider.value()
+  }); */
 
-/*ok, so I told you this when you were napping on the couch, but I don't think you will remember. I don't know how to use the Envelope feature nor do I know all the other ones. 
-The slider only changes the length of your tone, idk how to make it change anything else. My code is a bit weird. Make changes as needed. 
-Im sorry, you won't turn this in tonight. Gnight. I hope your stomach doesn't hurt when you wake up. */
+}
 
 function draw() {
   background(220);
@@ -40,7 +59,6 @@ function draw() {
     300,
     200
   );
-
 }
 
 function keyPressed() {
@@ -59,9 +77,9 @@ function keyPressed() {
   } else if (keyCode == 55) {
     synth.triggerAttackRelease("B4", num);
   } else if (keyCode == 56) {
-    synth.triggerAttackRelease("C4", num);
+    synth.triggerAttackRelease("C5", num);
   }
-}
+} 
 
 function Sine() {
   synth.oscillator.type = "sine";
