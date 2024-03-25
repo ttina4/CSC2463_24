@@ -5,3 +5,6 @@ function setup() {
 function draw() {
   background(220);
 }
+function mousePressed(){
+  background("assets/vending_music.png");
+}
