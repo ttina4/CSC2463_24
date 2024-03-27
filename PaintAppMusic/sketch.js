@@ -140,7 +140,7 @@ function draw() {
   textFont('Courier New');
   textStyle(BOLD);
   textSize(22);
-  text("Draw with a single line to play twinkle twinkle little star\nPress 'C' to clear the canvas\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧", windowWidth/2, windowHeight/25);
+  text("Click a color to draw a single line to play twinkle twinkle little star\nPress 'C' to clear the canvas\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧", windowWidth/2, windowHeight/25);
 
   if (mouseIsPressed) {
     push();
