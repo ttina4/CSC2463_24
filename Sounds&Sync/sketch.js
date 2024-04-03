@@ -2,11 +2,12 @@ let pluck = new Tone.PluckSynth().toDestination();
 pluck.type = 'sine'; 
 
 //pluck.harmonicity.value = 2; 
-//pluck.volume.value = -6; 
 
-let synth = new Tone.Synth().toDestination();
+
+let synth = new Tone.AMSynth().toDestination();
 synth.type = 'sine';
-synth.harmonicity.value = 2;
+synth.harmonicity.value = 0.1;
+synth.volume.value = 3;
 
 function preload() {
   vf = loadImage('assets/vending_music.png');
@@ -38,8 +39,8 @@ function draw() {
 }
 
   function mousePressed(){
-    synth.triggerAttackRelease("C6", 0.1); 
-    pluck.triggerAttackRelease("D3", 2);
+    synth.triggerAttackRelease("A5", 0.1); 
+    pluck.triggerAttackRelease("D2", 1);
   }
 
   
