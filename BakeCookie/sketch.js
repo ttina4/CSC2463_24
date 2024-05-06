@@ -1,17 +1,20 @@
 let bg, oven, ingredients = [];
 let ingredientsOven = [];
 let selectedIngredient = null;
-let timerValue = 5; // 1 minute timer
+let timerValue = 20;
+let timestart = 0; // 1 minute timer
 let over = 0;
 let whit;
 
-let serial;
-let led = false;
+let port;
+let isConnected = false; 
 
 let synth = new Tone.AMSynth().toDestination();
 synth.type = 'sine';
 synth.harmonicity.value = 0.1;
 synth.volume.value = 3;
+
+let num = 0;
 
 function preload() {
   bg = loadImage('/assets/background.png');
@@ -68,11 +71,14 @@ function setup() {
 
   setInterval(timer, 1000);
 
-  // Create a serial port object
-  serial = createSerial();
+  port = createSerial();
 
-  // Open the serial port
-  serial.open('Arduino', 9600); 
+  button = createButton("Connect Arduino");
+  button.size(400, 70);
+  button.position(windowWidth/2 - 200, 2120);
+  //button.center();
+  button.style("font-family", "Courier New");
+  button.mousePressed(connect);
 }
 
 function draw() {
@@ -115,11 +121,13 @@ function draw() {
     // fill(0);
     // rect(2048, 1500, width/2, height/2);
     // fill(220);
-    text("Ingredients In The Oven", width/2, 80);
-    for (let i = 0; i < ingredientsOven.length; i++) {
-      text("- " + ingredientsOven[i].name, width/2, yOffset);
-      yOffset += 50;
-    }
+    // text("Ingredients In The Oven", width/2, 80);
+    // for (let i = 0; i < ingredientsOven.length; i++) {
+    //   text("- " + ingredientsOven[i].name, width/2, yOffset);
+    //   yOffset += 50;
+    // }
+    text("Congrats!! You put " + num + " ingredients in the Oven!", width/2, height/2);
+
   }
 
 }
@@ -152,6 +160,7 @@ function mousePressed() {
       break;
     }
   }
+  
 }
 
 function mouseDragged() {
@@ -159,7 +168,9 @@ function mouseDragged() {
   if (selectedIngredient !== null) { // If an ingredient is selected
     selectedIngredient.x = mouseX - selectedIngredient.img.width / 2;
     selectedIngredient.y = mouseY - selectedIngredient.img.height / 2;
+    serial.write('1'); 
   }
+
 }
 
 // function mouseReleased() {
@@ -186,16 +197,30 @@ function mouseReleased() {
       ingredients = ingredients.filter(ingredient => ingredient !== selectedIngredient); // Remove the ingredient from the array
 
       synth.triggerAttackRelease("A6", 0.15); 
+
       
-      led = !led;
-      serial.write(led ? '1' : '0'); 
+      num = num + 1;
     }
     selectedIngredient = null;
   }
 }
 
 function timer() {
-  if (timerValue > 0) {
+  if (timerValue > 0 && timestart == 1) {
     timerValue--;
+  }
+}
+
+function connect() {
+  if (!port.opened()) {
+    port.open('Arduino', 9600);
+    button.html("Disconnect Arduino");
+    isConnected = true;
+    timestart = 1;
+  } else {
+    port.close();
+    button.html("Connect Arduino");
+    isConnected = false;
+    timestart = 0;
   }
 }
