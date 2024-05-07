@@ -168,7 +168,6 @@ function mouseDragged() {
   if (selectedIngredient !== null) { // If an ingredient is selected
     selectedIngredient.x = mouseX - selectedIngredient.img.width / 2;
     selectedIngredient.y = mouseY - selectedIngredient.img.height / 2;
-    serial.write('1'); 
   }
 
 }
@@ -197,12 +196,14 @@ function mouseReleased() {
       ingredients = ingredients.filter(ingredient => ingredient !== selectedIngredient); // Remove the ingredient from the array
 
       synth.triggerAttackRelease("A6", 0.15); 
+      port.write('1');
 
-      
       num = num + 1;
-    }
+      
+    } 
     selectedIngredient = null;
-  }
+    port.write('0');
+  } 
 }
 
 function timer() {
